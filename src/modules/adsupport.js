@@ -653,12 +653,16 @@ export default function (playerInstance, options) {
                     }
                     playerInstance.adFinished = true;
 
-                    //if any other onPauseRoll then render it
-                    if (playerInstance.rollsById[tempadListId].roll === 'onPauseRoll' && playerInstance.onPauseRollAdPods[0]) {
-                        const getNextOnPauseRollAd = playerInstance.onPauseRollAdPods[0];
-                        playerInstance.createBoard(getNextOnPauseRollAd);
+                    if (playerInstance.rollsById[tempadListId].roll === 'onPauseRoll') {
+                        // keep new currentOnPauseRollAd or undefined if none available
                         playerInstance.currentOnPauseRollAd = playerInstance.onPauseRollAdPods[0];
-                        delete playerInstance.onPauseRollAdPods[0];
+
+                        //if any other onPauseRoll then render it
+                        if (playerInstance.onPauseRollAdPods[0]) {
+                            const getNextOnPauseRollAd = playerInstance.onPauseRollAdPods[0];
+                            playerInstance.createBoard(getNextOnPauseRollAd);
+                            delete playerInstance.onPauseRollAdPods[0];
+                        }
                     }
 
                     return false;
@@ -820,14 +824,20 @@ export default function (playerInstance, options) {
             }
             playerInstance.adFinished = true;
             playerInstance.isCurrentlyShowingNonLinearAd = false;
-            clearInterval(playerInstance.nonLinearTracking);
+            if (playerInstance.nonLinearTracking) {
+                clearInterval(playerInstance.nonLinearTracking);
+            }
 
-            //if any other onPauseRoll then render it
-            if (playerInstance.rollsById[tempRollListId].roll === 'onPauseRoll' && playerInstance.onPauseRollAdPods[0]) {
-                const getNextOnPauseRollAd = playerInstance.onPauseRollAdPods[0];
-                playerInstance.createBoard(getNextOnPauseRollAd);
+            if (playerInstance.rollsById[tempRollListId].roll === 'onPauseRoll') {
+                // keep new currentOnPauseRollAd or undefined if none available
                 playerInstance.currentOnPauseRollAd = playerInstance.onPauseRollAdPods[0];
-                delete playerInstance.onPauseRollAdPods[0];
+
+                //if any other onPauseRoll then render it
+                if (playerInstance.onPauseRollAdPods[0]) {
+                    const getNextOnPauseRollAd = playerInstance.onPauseRollAdPods[0];
+                    playerInstance.createBoard(getNextOnPauseRollAd);
+                    delete playerInstance.onPauseRollAdPods[0];
+                }
             }
 
             return false;
@@ -1063,17 +1073,7 @@ export default function (playerInstance, options) {
 
                 const nonLinearAdExists = playerInstance.domRef.wrapper.getElementsByClassName('fluid_nonLinear_ad')[0];
                 if (!nonLinearAdExists) {
-                    playerInstance.createBoard(ad);
                     playerInstance.currentOnPauseRollAd = rollListId;
-                    let onPauseAd = '';
-                    for (const child of playerInstance.domRef.wrapper.children) {
-                        if (child.id === 'fluid_nonLinear_' + rollListId) {
-                            onPauseAd = child;
-                        }
-                    }
-                    if (onPauseAd) {
-                        onPauseAd.style.display = 'none';
-                    }
                 } else {
                     playerInstance.onPauseRollAdPods.push(rollListId);
                 }
@@ -1103,15 +1103,28 @@ export default function (playerInstance, options) {
      */
     playerInstance.toggleOnPauseAd = () => {
         playerInstance.toggleLoader(false);
-        if (playerInstance.hasValidOnPauseAd() && !playerInstance.isCurrentlyPlayingAd) {
-            const onPauseRoll = playerInstance.findRoll('onPauseRoll');
-            const ad = playerInstance.rollsById[onPauseRoll].ads[0];
+        if (playerInstance.hasValidOnPauseAd() && !playerInstance.isCurrentlyPlayingAd && playerInstance.currentOnPauseRollAd) {
+            const ad = playerInstance.rollsById[playerInstance.currentOnPauseRollAd].ads[0];
 
             playerInstance.vastOptions = ad;
             let onPauseAd = '';
             for (const child of playerInstance.domRef.wrapper.children) {
                 if (child.id === 'fluid_nonLinear_' + ad.id) {
                     onPauseAd = child;
+                }
+            }
+
+            if (playerInstance.domRef.player.paused && !onPauseAd) {
+                playerInstance.createBoard(ad);
+
+                for (const child of playerInstance.domRef.wrapper.children) {
+                    if (child.id === 'fluid_nonLinear_' + ad.id) {
+                        onPauseAd = child;
+                    }
+                }
+
+                if (!onPauseAd) {
+                    onPauseAd.style.display = 'none';
                 }
             }
 
