@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 3.58.0 (2026-02-24)
+* [Pull #922](https://github.com/fluid-player/fluid-player/pull/922) In video banner, VAST impression is not tracked
+
 ## 3.57.0 (2025-09-15)
 * [Pull #904](https://github.com/fluid-player/fluid-player/pull/904) Add custom tracking events to Fluid Player
 
