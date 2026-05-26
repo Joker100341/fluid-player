@@ -2177,7 +2177,6 @@ const fluidPlayerClass = function () {
 
         const skipAnimationBackwardIcon = document.createElement('div');
         skipAnimationBackwardIcon.classList.add('fluid_player_skip_offset__backward-icon');
-        skipAnimationBackwardIcon.ontransitionend = () => skipAnimationBackwardIcon.classList.remove('animate');
         skipAnimationBackward.appendChild(skipAnimationBackwardIcon);
 
         const skipAnimationForward = document.createElement('div');
@@ -2186,7 +2185,6 @@ const fluidPlayerClass = function () {
 
         const skipAnimationForwardIcon = document.createElement('div');
         skipAnimationForwardIcon.classList.add('fluid_player_skip_offset__forward-icon');
-        skipAnimationForwardIcon.ontransitionend = () => skipAnimationForwardIcon.classList.remove('animate');
         skipAnimationForward.appendChild(skipAnimationForwardIcon);
 
         self.domRef.player.parentNode.insertBefore(skipAnimationWrapper, self.domRef.player.nextSibling);
@@ -2253,14 +2251,17 @@ const fluidPlayerClass = function () {
         }
         self.domRef.player.currentTime = skipTo;
 
-        // Trigger animation
-        if (timeOffset >= 0) {
-            const forwardElement = self.domRef.wrapper.querySelector(`.fluid_player_skip_offset__forward-icon`);
-            forwardElement.classList.add('animate');
-        } else {
-            const backwardElement = self.domRef.wrapper.querySelector(`.fluid_player_skip_offset__backward-icon`);
-            backwardElement.classList.add('animate');
-        }
+        // Trigger animation. Use a timer for cleanup instead of `transitionend`:
+        // under main-thread pressure (e.g. rapid seeking that forces buffering),
+        // the browser can drop transition events and the `.animate` class would
+        // never be removed, leaving the icon permanently visible.
+        const iconSelector = timeOffset >= 0
+            ? '.fluid_player_skip_offset__forward-icon'
+            : '.fluid_player_skip_offset__backward-icon';
+        const icon = self.domRef.wrapper.querySelector(iconSelector);
+        clearTimeout(icon._fadeTimer);
+        icon.classList.add('animate');
+        icon._fadeTimer = setTimeout(() => icon.classList.remove('animate'), 600);
     }
 
     /**
