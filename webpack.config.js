@@ -131,11 +131,24 @@ module.exports = (env, argv) => {
         ));
     }
 
+    const certKeyPath = path.resolve(__dirname, 'certs/localhost-key.pem');
+    const certPath = path.resolve(__dirname, 'certs/localhost.pem');
+    const httpsEnabled = typeof env.https !== 'undefined' && fs.existsSync(certKeyPath) && fs.existsSync(certPath);
+
     return {
         devServer: {
             static: wpDistOptions.path,
             // index: 'index.html',
             // allowedHosts: "all", // To use with remote hosting (ie: ngrok)
+            ...(httpsEnabled && {
+                server: {
+                    type: 'https',
+                    options: {
+                        key: fs.readFileSync(certKeyPath),
+                        cert: fs.readFileSync(certPath),
+                    }
+                }
+            }),
         },
         devtool: wpMode === 'development' ? 'source-map' : false,
         plugins,
