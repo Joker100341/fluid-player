@@ -1,6 +1,3 @@
-import '@photo-sphere-viewer/core/index.css';
-import '@photo-sphere-viewer/video-plugin/index.css';
-
 let _psvModules = null;
 
 const CARDBOARD_VERT = `
@@ -453,11 +450,13 @@ export default function (playerInstance, options) {
         if (!_psvModules) {
             Promise.all([
                 import(/* webpackChunkName: "psv" */ '@photo-sphere-viewer/core'),
+                import(/* webpackChunkName: "psv" */ '@photo-sphere-viewer/core/index.css'),
                 import('@photo-sphere-viewer/equirectangular-video-adapter'),
                 import('@photo-sphere-viewer/video-plugin'),
+                import(/* webpackChunkName: "psv" */ '@photo-sphere-viewer/video-plugin/index.css'),
                 import('@photo-sphere-viewer/gyroscope-plugin'),
                 import('three'),
-            ]).then(([core, videoAdapter, videoPlugin, gyroscopePlugin, THREE]) => {
+            ]).then(([core, , videoAdapter, videoPlugin, , gyroscopePlugin, THREE]) => {
                 _psvModules = { core, videoAdapter, videoPlugin, gyroscopePlugin, CardboardEffect: buildCardboardEffect(THREE) };
                 playerInstance.createCardboardView();
             });
