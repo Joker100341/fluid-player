@@ -9,6 +9,7 @@
     "build-dev": "webpack --mode=development",
     "build-dev-debug": "webpack --mode=development --debug",
     "dev-server": "webpack serve --mode=development --host 0.0.0.0",
+    "dev-server-https": "webpack serve --mode=development --host 0.0.0.0 --env https",
     "dev-server-debug": "webpack serve --mode=development --env debug --host 0.0.0.0",
     "dev-server-test": "webpack serve --mode=production --no-live-reload --host 0.0.0.0",
     "start": "npm run dev-server-debug",
@@ -35,10 +36,14 @@
     "IE 11"
   ],
   "dependencies": {
+    "@photo-sphere-viewer/core": "^5.14.1",
+    "@photo-sphere-viewer/equirectangular-video-adapter": "^5.14.1",
+    "@photo-sphere-viewer/gyroscope-plugin": "^5.14.1",
+    "@photo-sphere-viewer/video-plugin": "^5.14.1",
     "dashjs": "^4.5.2",
     "es6-promise": "^4.2.8",
     "hls.js": "^1.5.13",
-    "panolens": "^0.12.1",
+    "three": "^0.179.1",
     "videojs-vtt.js": "^0.15.4"
   },
   "devDependencies": {

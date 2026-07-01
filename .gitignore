@@ -1,6 +1,7 @@
 node_modules/
 dist/
 dist-cdn/
+certs/
 
 # IDEs and editors
 /.idea
