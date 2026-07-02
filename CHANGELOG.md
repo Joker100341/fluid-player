@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.59.0 (2026-07-01)
+* [Pull #933](https://github.com/fluid-player/fluid-player/pull/933) prevent skip-forward/back icons from getting stuck visible
+* [Pull #934](https://github.com/fluid-player/fluid-player/pull/934) Panolens deprecation and security concerns
+
 ## 3.58.0 (2026-02-24)
 * [Pull #922](https://github.com/fluid-player/fluid-player/pull/922) In video banner, VAST impression is not tracked
 
