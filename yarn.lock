@@ -983,6 +983,28 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@photo-sphere-viewer/core@^5.14.1":
+  version "5.14.3"
+  resolved "https://registry.yarnpkg.com/@photo-sphere-viewer/core/-/core-5.14.3.tgz#4d6dca567143d727ed1464a875f73e477277d388"
+  integrity sha512-gSDzM1fuVfWQiDf8Y4AgI+un/wsKmeFO7cY4IFEbjhD1BTXUviSL8GuCXABNfPK2EThZLJqpOXxrbYAhblJrfQ==
+  dependencies:
+    three "^0.184.0"
+
+"@photo-sphere-viewer/equirectangular-video-adapter@^5.14.1":
+  version "5.14.3"
+  resolved "https://registry.yarnpkg.com/@photo-sphere-viewer/equirectangular-video-adapter/-/equirectangular-video-adapter-5.14.3.tgz#a4fc425bdf07a654cf5fbc6c67bce1e1f2ad7514"
+  integrity sha512-jgdFMAGkVgtybq0d+zP3Qbu8SNw1Makw/EOpqyeo1klHK+S5JBRp1ibtq/9NRPtYTlf3Ral03iYR6iDgJuxJbg==
+
+"@photo-sphere-viewer/gyroscope-plugin@^5.14.1":
+  version "5.14.3"
+  resolved "https://registry.yarnpkg.com/@photo-sphere-viewer/gyroscope-plugin/-/gyroscope-plugin-5.14.3.tgz#1aba6c55437f777f7531caa7e183c60dd5711992"
+  integrity sha512-5JyDcndnHoJmFEfamzYncslcfDY+9gD/A7wuxLlw0mEkj2S0Vdue414nxI+xgwTTPd6UAvOwM3KWQyWWcE1Vlg==
+
+"@photo-sphere-viewer/video-plugin@^5.14.1":
+  version "5.14.3"
+  resolved "https://registry.yarnpkg.com/@photo-sphere-viewer/video-plugin/-/video-plugin-5.14.3.tgz#7e5ff4aaa52abe80baaa8d2c5585a5befe3dca03"
+  integrity sha512-yMUd3JG0ROJpJkPXJbdFiIkz+m6lDMRrIeLm/bwXvaX+Q1uSgyX0ipIkJrQnAtdk/IU5fdyqBwfn9ExlQ27c2A==
+
 "@playwright/test@^1.49.0":
   version "1.49.0"
   resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.49.0.tgz#74227385b58317ee076b86b56d0e1e1b25cff01e"
@@ -2909,13 +2931,6 @@ p-try@^2.0.0:
   resolved "https://registry.npmjs.org/p-try/-/p-try-2.2.0.tgz"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-panolens@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.npmjs.org/panolens/-/panolens-0.12.1.tgz"
-  integrity sha512-2hpjm+rRnDdaLD5Bak49K0Y9/X6vOr1OcyJx5piSA6sCOs1tsgchMgKIwpSGCMpBMHWZ10E/Cz4BIwyXYebt5g==
-  dependencies:
-    three "^0.105.2"
-
 param-case@^3.0.4:
   version "3.0.4"
   resolved "https://registry.npmjs.org/param-case/-/param-case-3.0.4.tgz"
@@ -3569,10 +3584,15 @@ terser@^5.10.0, terser@^5.14.1:
     commander "^2.20.0"
     source-map-support "~0.5.20"
 
-three@^0.105.2:
-  version "0.105.2"
-  resolved "https://registry.npmjs.org/three/-/three-0.105.2.tgz"
-  integrity sha512-L3Al37k4g3hVbgFFS251UVtIc25chhyN0/RvXzR0C+uIBToV6EKDG+MZzEXm9L2miGUVMK27W46/VkP6WUZXMg==
+three@^0.179.1:
+  version "0.179.1"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.179.1.tgz#6c0b43e046eaad0f42b163143517a44ae44ed446"
+  integrity sha512-5y/elSIQbrvKOISxpwXCR4sQqHtGiOI+MKLc3SsBdDXA2hz3Mdp3X59aUp8DyybMa34aeBwbFTpdoLJaUDEWSw==
+
+three@^0.184.0:
+  version "0.184.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.184.0.tgz#5bca0a3851eea5345e4c205567b40dfa49b791b5"
+  integrity sha512-wtTRjG92pM5eUg/KuUnHsqSAlPM296brTOcLgMRqEeylYTh/CdtvKUvCyyCQTzFuStieWxvZb8mVTMvdPyUpxg==
 
 thunky@^1.0.2:
   version "1.1.0"
